@@ -9,6 +9,7 @@ public class Inventory
     public List<User> Users { get; protected set; }
     
     public List<Rental> Rentals { get; protected set; }
+    public List<InactiveRental> InactiveRentals { get; protected set; }
     
     
 }
