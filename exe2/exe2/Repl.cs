@@ -7,6 +7,7 @@ public class Repl
 {
     private readonly IManager _manager;
     private readonly Dictionary<string, (string Description, Action Handler)> _commands;
+    private readonly IdTracker _idTracker = new();
 
     public Repl(IManager manager)
     {
@@ -65,11 +66,10 @@ public class Repl
         Console.Write("Full name: ");
         var name = Console.ReadLine()!;
 
-        Console.Write("ID: ");
-        var id = Console.ReadLine()!;
+        var id = _idTracker.NextId();
 
         Console.Write("Balance: ");
-        var balance = int.Parse(Console.ReadLine()!);
+        var balance = ReadInt();
 
         User user = type switch
         {
@@ -79,7 +79,7 @@ public class Repl
         };
 
         _manager.AddUser(user);
-        Console.WriteLine($"User '{name}' added.");
+        Console.WriteLine($"User '{name}' added with ID {id}.");
     }
 
     private void HandleAddEquipment()
@@ -87,8 +87,7 @@ public class Repl
         Console.Write("Type (camera/laptop/projector): ");
         var type = Console.ReadLine()?.Trim().ToLower();
 
-        Console.Write("ID: ");
-        var id = Console.ReadLine()!;
+        var id = _idTracker.NextId();
 
         Console.Write("Producer: ");
         var producer = Console.ReadLine()!;
@@ -102,7 +101,7 @@ public class Repl
         };
 
         _manager.AddEquipment(equipment);
-        Console.WriteLine($"{equipment.Name} '{equipment.Id}' added.");
+        Console.WriteLine($"{equipment.Name} added with ID {equipment.Id}.");
     }
 
     private static Equipment CreateCamera(string id, string producer)
@@ -151,7 +150,7 @@ public class Repl
         var userId = Console.ReadLine()!;
 
         Console.Write("Rental days: ");
-        var days = int.Parse(Console.ReadLine()!);
+        var days = ReadInt();
 
         var rental = _manager.RentEquipment(equipmentId, userId, days);
         Console.WriteLine($"Rented '{rental.Equipment.Description}' to {rental.Renter.Fullname} until {rental.Due:yyyy-MM-dd}.");
@@ -198,6 +197,14 @@ public class Repl
             var daysOverdue = (DateTime.Now - r.Due).Days;
             Console.WriteLine($"  [{r.Equipment.Id}] {r.Equipment.Description}  |  Renter: {r.Renter.Fullname}  |  Overdue: {daysOverdue} day(s)");
         }
+    }
+
+    private static int ReadInt()
+    {
+        var input = Console.ReadLine();
+        if (!int.TryParse(input, out var value))
+            throw new InvalidOperationException($"'{input}' is not a valid integer.");
+        return value;
     }
 
     private void HandleSummaryReport()
