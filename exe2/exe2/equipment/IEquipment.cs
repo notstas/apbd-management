@@ -1,11 +1,11 @@
 namespace exe2.equipment;
 
-public interface IEquipment
+public abstract class Equipment
 {
-    string Id { get; }
-    string Name { get; }
-    
-    string Producer { get;  }
-    
-    string Description { get; }
+    public abstract string Id { get; }
+    public abstract string Name { get; }
+    public abstract string Producer { get; }
+    public abstract string Description { get; }
+
+    public bool IsAvailable { get; set; } = true;
 }
