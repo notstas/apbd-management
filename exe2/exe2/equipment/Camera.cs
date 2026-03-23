@@ -7,6 +7,7 @@ public class Camera(string id, string resolution, string producer) : IEquipment
     public string Name => "Camera";
     public string Producer { get; } = producer;
     public string Id { get; } = id;
-    
+    public bool IsAvailable { get; set; } = true;
+
     public string Description => $"Camera (ID: {Id}; Producer: {Producer}) {_resolution}";
 }
