@@ -93,7 +93,7 @@ public class Repl
         Console.Write("Producer: ");
         var producer = Console.ReadLine()!;
 
-        IEquipment equipment = type switch
+        Equipment equipment = type switch
         {
             "camera"    => CreateCamera(id, producer),
             "laptop"    => CreateLaptop(id, producer),
@@ -105,21 +105,21 @@ public class Repl
         Console.WriteLine($"{equipment.Name} '{equipment.Id}' added.");
     }
 
-    private static IEquipment CreateCamera(string id, string producer)
+    private static Equipment CreateCamera(string id, string producer)
     {
         Console.Write("Resolution: ");
         var resolution = Console.ReadLine()!;
         return new Camera(id, resolution, producer);
     }
 
-    private static IEquipment CreateLaptop(string id, string producer)
+    private static Equipment CreateLaptop(string id, string producer)
     {
         Console.Write("Description: ");
         var description = Console.ReadLine()!;
         return new Laptop(id, producer, description);
     }
 
-    private static IEquipment CreateProjector(string id, string producer)
+    private static Equipment CreateProjector(string id, string producer)
     {
         Console.Write("Description: ");
         var description = Console.ReadLine()!;

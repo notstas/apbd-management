@@ -1,10 +1,9 @@
 namespace exe2.equipment;
 
-public class Laptop(string id, string producer, string description) : IEquipment
+public class Laptop(string id, string producer, string description) : Equipment
 {
-    public string Id { get; } = id;
-    public string Name => "Laptop";
-    public string Producer { get; } = producer;
-    public string Description { get; } = description;
-    public bool IsAvailable { get; set; } = true;
+    public override string Id { get; } = id;
+    public override string Name => "Laptop";
+    public override string Producer { get; } = producer;
+    public override string Description { get; } = description;
 }

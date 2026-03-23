@@ -1,13 +1,14 @@
 namespace exe2.equipment;
 
-public class Camera(string id, string resolution, string producer) : IEquipment
+public class Camera(string id, string resolution, string producer) : Equipment
 {
     private readonly string _resolution = resolution;
 
-    public string Name => "Camera";
-    public string Producer { get; } = producer;
-    public string Id { get; } = id;
-    public bool IsAvailable { get; set; } = true;
+    public override string Name => "Camera";
+    public override string Producer { get; } = producer;
+    public override string Id { get; } = id;
 
-    public string Description => $"Camera (ID: {Id}; Producer: {Producer}) {_resolution}";
+    public override string Description => $"Camera (ID: {Id}; Producer: {Producer}) {_resolution}";
+
+     public bool IsAvailable { get; set; } = true;
 }

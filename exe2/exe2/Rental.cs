@@ -3,4 +3,4 @@ using exe2.user;
 
 namespace exe2;
 
-public record Rental(IEquipment Equipment, User Renter, DateTime Started, DateTime Due);
+public record Rental(Equipment Equipment, User Renter, DateTime Started, DateTime Due);

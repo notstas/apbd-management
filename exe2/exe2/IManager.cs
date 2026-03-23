@@ -16,9 +16,9 @@ public record RentalSummary(
 public interface IManager
 {
     void AddUser(User user);
-    void AddEquipment(IEquipment equipment);
-    IEnumerable<(IEquipment Equipment, string Status)> GetAllEquipmentWithStatus();
-    IEnumerable<IEquipment> GetAvailableEquipment();
+    void AddEquipment(Equipment equipment);
+    IEnumerable<(Equipment Equipment, string Status)> GetAllEquipmentWithStatus();
+    IEnumerable<Equipment> GetAvailableEquipment();
     Rental RentEquipment(string equipmentId, string userId, int rentalDays);
     (InactiveRental InactiveRental, double? LatePenalty) ReturnEquipment(string equipmentId);
     void MarkEquipmentUnavailable(string equipmentId);
