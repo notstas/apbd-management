@@ -14,6 +14,11 @@ public class Manager: IManager
         _inventory.Users.Add(user);
     }
 
+    public IEnumerable<User> GetAllUsers()
+    {
+        return _inventory.Users;
+    }
+
     public void AddEquipment(Equipment equipment)
     {
         if (_inventory.Equipments.Any(e => e.Id == equipment.Id))
@@ -29,6 +34,11 @@ public class Manager: IManager
     public IEnumerable<Equipment> GetAvailableEquipment()
     {
         return _inventory.Equipments.Where(IsRentable);
+    }
+
+    public void MarkEquipmentAvailable(string equipmentId)
+    {
+        FindEquipment(equipmentId).IsAvailable = true;
     }
 
     public Rental RentEquipment(string equipmentId, string userId, int rentalDays)
