@@ -1,6 +1,6 @@
 namespace exe2.user;
 
-public class Student(string fullname) : User(fullname)
+public class Student(string fullname, string id, int balance) : User(fullname, id, balance)
 {
     public override double LateReturnInterest => (double)4.0;
     public override int MaxSimultaneousEquipment => 2;

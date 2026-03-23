@@ -7,7 +7,7 @@ public record InactiveRental(
 {
     public double? Interest()
     {
-        var overdueDelta = ReturnDate - Rental.rentalDate;
+        var overdueDelta = ReturnDate - Rental.Started;
         var overdueDays = overdueDelta.Days;
         
         // Rent is not overdue

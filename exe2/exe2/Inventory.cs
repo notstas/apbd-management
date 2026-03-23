@@ -10,6 +10,17 @@ public class Inventory
     
     public List<Rental> Rentals { get; protected set; }
     public List<InactiveRental> InactiveRentals { get; protected set; }
+
+    public List<Rental> UserActiveRentals(User user)
+    {
+        return Rentals.Where(r => r.Renter.Equals(user)).ToList();
+    }
+
+    public void FinalizeRental(Rental rental)
+    {
+        Rentals.Remove(rental);
+        InactiveRentals.Append(new InactiveRental(rental, new DateTime()));
+    }
     
     
 }
